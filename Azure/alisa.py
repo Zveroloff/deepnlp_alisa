@@ -69,7 +69,7 @@ def handle_dialog(req, res):
         return
 
     # Если нет, то убеждаем его купить слона!
-    res['session']['original_utterance'] = req['request']['original_utterance'].lower()
+    #res['session']['original_utterance'] = req['request']['original_utterance'].lower()
     res['response']['text'] = get_response(user_id)
     res['response']['buttons'] = get_suggests(user_id)
 

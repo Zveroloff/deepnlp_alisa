@@ -69,8 +69,8 @@ def handle_dialog(req, res):
         return
 
     # Если нет, то убеждаем его купить слона!
-    #res['session']['original_utterance'] = req['request']['original_utterance'].lower()
-    res['response']['text'] = get_response(user_id)
+    original_utterance = req['request']['original_utterance'].lower()
+    res['response']['text'] = get_response(user_id, original_utterance)
     res['response']['buttons'] = get_suggests(user_id)
 
 # Функция возвращает две подсказки для ответа.
@@ -112,10 +112,10 @@ fallback = PatternMatchingSkill(["I don't understand, sorry", 'I can say "Hello 
 agent = DefaultAgent([hello, bye, fallback], skills_selector=HighestConfidenceSelector())
 
 
-def get_response(user_id):
+def get_response(user_id, original_utterance):
     session = sessionStorage[user_id]
 
     # Получаем ответ от агента на основе запроса пользователя
-    responses = agent([session['original_utterance']])
+    responses = agent([original_utterance])
 
     return 'It works!'

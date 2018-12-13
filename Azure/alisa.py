@@ -118,4 +118,4 @@ def get_response(user_id, original_utterance):
     # Получаем ответ от агента на основе запроса пользователя
     responses = agent([original_utterance])
 
-    return 'It works!'
+    return responses[0]
